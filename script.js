@@ -163,76 +163,104 @@ function exitGame() {
     alert("Game ditutup 🎮. Terima kasih sudah bermain!");
     document.getElementById("game").style.display = "none";
 }
-// === SIMPAN DATA KE LOCAL STORAGE ===
-function simpanData() {
-    let nama = document.getElementById("nama").value;
-    let alamat = document.getElementById("alamat").value;
-    let umur = document.getElementById("umur").value;
-    let email = document.getElementById("email").value;
 
-    if (!nama || !alamat || !umur || !email || !tanggalmengunjuni) {
-        alert("Harap isi semua data!");
-        return;
-    }
 
-    let data = {
-        nama: nama,
-        alamat: alamat,
-        umur: umur,
-        email: email,
-        tanggalmengunjuni
-    };
-
-    // Ambil data lama
-    let daftar = JSON.parse(localStorage.getItem("pengunjung")) || [];
-
-    // Tambah data baru
-    daftar.push(data);
-
-    // Simpan kembali
-    localStorage.setItem("pengunjung", JSON.stringify(daftar));
-
-    alert("Data berhasil disimpan!");
-
-    // Refresh tabel
-    tampilkanData();
-
-    // Kosongkan form
-    document.getElementById("nama").value = "";
-    document.getElementById("alamat").value = "";
-    document.getElementById("umur").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("tanggal mengunjungi ").value = "";
+<td>${item.nama}</td>
+<td>${item.alamat}</td>
+<td>${item.umur}</td>
+<td>${item.email}</td>
+</tr>
+`;
+});
 }
 
-// === TAMPILKAN DATA DI TABEL ===
-function tampilkanData() {
-    let daftar = JSON.parse(localStorage.getItem("pengunjung")) || [];
-    let tabel = document.getElementById("tabelPengunjung");
 
-    tabel.innerHTML = ""; // Kosongkan dulu
-
-    daftar.forEach((p) => {
-        let row = `
-            <tr>
-                <td>${p.nama}</td>
-                <td>${p.alamat}</td>
-                <td>${p.umur}</td>
-                <td>${p.email}</td>
-                 <td>${p.tanggalmengunjungi}</td>
-            </tr>
-        `;
-        tabel.innerHTML += row;
-    });
+// Reset semua data
+function resetVisitorData() {
+localStorage.removeItem('visitor_count');
+localStorage.removeItem('visitor_dataset');
+alert('Semua data berhasil di-reset!');
+location.reload();
 }
 
-// === RESET DATA ===
-function resetData() {
-    if (confirm("Apakah yakin ingin menghapus semua data?")) {
-        localStorage.removeItem("pengunjung");
-        tampilkanData();
-    }
+
+<!-- === Visitor Dataset Form === -->
+<section id="visitor-dataset" style="padding:40px; max-width:600px; margin:auto; font-family:Poppins;">
+<h2>Form Data Pengunjung</h2>
+<p>Silahkan isi data berikut:</p>
+
+
+<form id="visitorForm" style="display:flex; flex-direction:column; gap:12px; margin-top:15px;">
+
+
+<input type="text" id="nama" placeholder="Nama" required style="padding:10px; border-radius:8px; border:1px solid #ccc;" />
+
+
+<input type="text" id="alamat" placeholder="Tempat Tinggal" required style="padding:10px; border-radius:8px; border:1px solid #ccc;" />
+
+
+<input type="number" id="umur" placeholder="Umur" required style="padding:10px; border-radius:8px; border:1px solid #ccc;" />
+
+
+<input type="email" id="email" placeholder="Email" required style="padding:10px; border-radius:8px; border:1px solid #ccc;" />
+
+
+<input type="date" id="tanggal" required style="padding:10px; border-radius:8px; border:1px solid #ccc;" />
+
+
+<button type="submit" style="padding:12px; background:#00eaff; border-radius:8px; border:none; color:#000; font-weight:600; cursor:pointer;">Simpan Data</button>
+</form>
+
+
+<h3 style="margin-top:30px;">📄 Data Pengunjung Tersimpan:</h3>
+<div id="visitorList" style="margin-top:10px; padding:15px; background:#f1f1f1; border-radius:10px;"></div>
+</section>
+
+
+<script>
+// Simpan data pengunjung ke localStorage
+const form = document.getElementById('visitorForm');
+const listBox = document.getElementById('visitorList');
+
+
+function loadVisitors() {
+let data = JSON.parse(localStorage.getItem('visitor_dataset')) || [];
+listBox.innerHTML = data
+.map((v, i) => `
+<div style='padding:10px; background:#fff; margin-bottom:10px; border-radius:8px; box-shadow:0 0 5px #ddd;'>
+<b>${i + 1}. ${v.nama}</b><br>
+📍 ${v.alamat}<br>
+🎂 Umur: ${v.umur}<br>
+✉️ ${v.email}<br>
+📅 Tanggal: ${v.tanggal}
+</div>
+`)
+.join('');
 }
 
-// === LOAD SAAT PAGE DIBUKA ===
-document.addEventListener("DOMContentLoaded", tampilkanData);
+
+loadVisitors();
+
+
+form.addEventListener('submit', function (e) {
+e.preventDefault();
+
+
+const entry = {
+nama: document.getElementById('nama').value,
+alamat: document.getElementById('alamat').value,
+umur: document.getElementById('umur').value,
+email: document.getElementById('email').value,
+tanggal: document.getElementById('tanggal').value
+};
+
+
+let data = JSON.parse(localStorage.getItem('visitor_dataset')) || [];
+data.push(entry);
+localStorage.setItem('visitor_dataset', JSON.stringify(data));
+
+
+form.reset();
+loadVisitors();
+});
+</script>
