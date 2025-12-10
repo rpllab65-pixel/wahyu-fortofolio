@@ -324,45 +324,46 @@
       </div>
     </section>
 
-    
-<!-- === DATASET PENGUNJUNG === -->
-<section id="dataset" class="section">
-    <h2 class="title">📋 Data Pengunjung</h2>
-
-    <!-- Form Input -->
-    <div class="card" style="max-width: 500px; margin:auto; padding:20px;">
-        <h3>Isi Data Pengunjung</h3>
-        <input type="text" id="nama" placeholder="Nama..." class="inputGame" required />
-        <input type="text" id="alamat" placeholder="Tempat Tinggal..." class="inputGame" required />
-        <input type="number" id="umur" placeholder="Umur..." class="inputGame" required />
-        <input type="email" id="email" placeholder="Email..." class="inputGame" required />
-        <button onclick="simpanData()" class="btn">Simpan Data</button>
-    </div>
-
-    <br><br>
-
-    <!-- Tabel Data -->
-    <div class="card" style="overflow-x:auto; padding:20px;">
-        <h3>📊 Daftar Pengunjung</h3>
-        <table border="1" width="100%" style="border-collapse: collapse; text-align:center; color:white;">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>Umur</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody id="tabelPengunjung"></tbody>
-        </table>
-
-        <button onclick="resetData()" class="btn" style="margin-top:15px; background:red;">
-          Reset Semua Data
-        </button>
-    </div>
+  <!-- FORM INPUT DATA PENGUNJUNG -->
+<section class="visitor-form">
+<h2>Form Data Pengunjung</h2>
+<input type="text" id="nama" placeholder="Nama" required>
+<input type="text" id="alamat" placeholder="Tempat Tinggal" required>
+<input type="number" id="umur" placeholder="Umur" required>
+<input type="email" id="email" placeholder="Email" required>
+<button onclick="saveVisitor()">Kirim</button>
 </section>
 
 
+<!-- COUNTER PENGUNJUNG -->
+<div id="visitorCounter"></div>
+
+
+<!-- Tabel Data Pengunjung -->
+<section class="visitor-table">
+<h2>Data Pengunjung</h2>
+<table id="dataTable">
+<thead>
+<tr>
+<th>Nama</th>
+<th>Alamat</th>
+<th>Umur</th>
+<th>Email</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</section>
+
+
+<!-- Tombol Reset -->
+<button id="resetBtn" onclick="resetVisitorData()">Reset Semua Data</button>
+
+
+<!-- Link JS -->
+<script src="script.js"></script>
+</body>
+</html>
 
 <footer>
   <p>© <span id="year"></span> All Rights Reserved — Created by Wahyu Eka A.P</p>
@@ -370,4 +371,5 @@
 
 <script src="script.js"></script>
 </body>
+
 </html>
