@@ -793,15 +793,66 @@ nav a:hover {
     font-size: 15px;
 }
 
-#dataset input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 8px;
-    border: none;
+
+
+
+
+<!-- ====================== STYLE.CSS ====================== -->
+/* Form */
+.visitor-form {
+width: 300px;
+margin: 20px auto;
+display: flex;
+flex-direction: column;
+gap: 10px;
 }
 
-#dataset table th,
-#dataset table td {
-    padding: 10px;
+
+.visitor-form input, .visitor-form button {
+padding: 10px;
+border-radius: 6px;
+border: 1px solid #aaa;
+}
+
+
+#visitorCounter {
+position: fixed;
+bottom: 20px;
+right: 20px;
+background: #111a;
+padding: 10px 18px;
+border-radius: 10px;
+color: #00eaff;
+font-family: Poppins;
+}
+
+
+#resetBtn {
+position: fixed;
+bottom: 70px;
+right: 20px;
+background: #ff4444;
+color: white;
+padding: 10px 15px;
+border-radius: 8px;
+border: none;
+}
+
+
+/* Tabel */
+.visitor-table {
+margin: 20px auto;
+width: 90%;
+}
+
+
+.visitor-table table {
+width: 100%;
+border-collapse: collapse;
+}
+
+
+.visitor-table th, .visitor-table td {
+border: 1px solid #ddd;
+padding: 10px;
 }
